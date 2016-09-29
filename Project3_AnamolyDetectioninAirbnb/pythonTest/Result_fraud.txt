@@ -1,0 +1,5 @@
+Austin	130
+Boston	23
+Nashville	16
+Oakland	11
+SantaCruz	15SantaCruz	130
