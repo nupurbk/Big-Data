@@ -1,0 +1,60 @@
+ {
+    "name" : "iam_read_only",
+    "master_hosts" : 1,
+    "master_vm_type" : "2xlarge",
+    "slave_hosts" : 3,
+    "slave_vm_type" : "medium",
+    "os" : "centos6",
+    "parcels": true,
+    "provision-options" : "--instance-profile=CloudPlatformRO",
+    "cdep-options" : "--exclude-service-types=ACCUMULO,ACCUMULO16"
+  },
+  {
+    "name" : "aws_api_keys",
+    "master_hosts" : 1,
+    "master_vm_type" : "2xlarge",
+    "slave_hosts" : 3,
+    "slave_vm_type" : "medium",
+    "os" : "centos6",
+    "parcels": true,
+    "cdep-options" : "--aws-access-key=${AWS_ACCESS_KEY} --aws-secret-key=${AWS_SECRET_KEY} --exclude-service-types=ACCUMULO,ACCUMULO16"
+  },
+  {
+    "name" : "ec_fault_injection",
+    "master_hosts" : 2,
+    "master_vm_type" : "2xlarge",
+    "slave_hosts" : 30,
+    "slave_vm_type" : "2xlarge",
+    "os" : "centos73",
+    "java" : "${JAVA_VERSION_8u144}",
+    "database" : "mysql_or_mariadb",
+    "include-services" : "ZOOKEEPER,HDFS,YARN",
+    "parcels": true,
+    "cdep-options" : "-ec -ecp=RS-6-3-1024k"
+  },
+  {
+    "name" : "hdfs_full_functional",
+    "master_hosts" : 2,
+    "master_vm_type" : "2xlarge",
+    "slave_hosts" : 6,
+    "slave_vm_type" : "2xlarge",
+    "os" : "centos73",
+    "java" : "${JAVA_VERSION_8u144}",
+    "database" : "mysql_or_mariadb",
+    "include-services" : "ZOOKEEPER,HDFS,HBASE,HIVE,YARN,FLUME,KAFKA,OOZIE,HUE,SQOOP_CLIENT,SOLR,KS_INDEXER,KUDU,SPARK_ON_YARN,KMS,IMPALA,SENTRY",
+    "parcels": true,
+    "cdep-options" : "--ha-service-types=HDFS"
+  },
+  {
+    "name" : "ec_full_functional",
+    "master_hosts" : 2,
+    "master_vm_type" : "2xlarge",
+    "slave_hosts" : 16,
+    "slave_vm_type" : "2xlarge",
+    "os" : "centos73",
+    "java" : "${JAVA_VERSION_8u144}",
+    "database" : "mysql_or_mariadb",
+    "include-services" : "ZOOKEEPER,HDFS,YARN",
+    "parcels": true,
+    "cdep-options" : "--ha-service-types=HDFS -ec -ecp=RS-6-3-1024k"
+  }
